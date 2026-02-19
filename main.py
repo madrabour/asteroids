@@ -46,7 +46,8 @@ def main():
             for shot in shots:
                 if asti.collides_with(shot):
                     log_event("asteroid_shot")
-                    asti.kill()
+                    #asti.kill()
+                    asti.split()
                     shot.kill()
 
 
