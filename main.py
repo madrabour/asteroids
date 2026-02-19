@@ -38,12 +38,26 @@ def main():
         for drawling in drawable:
             drawling.draw(screen)
         updatable.update(dt)
-        for astis in asteroids:
-            if astis.collides_with(player1):
+        for asti in asteroids:
+            if asti.collides_with(player1):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
-        
+            for shot in shots:
+                if asti.collides_with(shot):
+                    log_event("asteroid_shot")
+                    asti.kill()
+                    shot.kill()
+
+
+        """
+        for asti in asteroids:
+            for shot in shots:
+                if asti.collides_with(shot):
+                    log_event("asteroid_shot")
+                    asti.kill()
+                    shot.kill()
+        """
         
         pygame.display.flip()
         
