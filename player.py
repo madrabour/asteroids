@@ -37,14 +37,14 @@ class Player(CircleShape):
         rotated_vector = unit_vector.rotate(self.rotation)
         rotated_with_speed_vector = rotated_vector * PLAYER_SPEED * dt
         self.position += rotated_with_speed_vector
-        #if self.position.x < 0:
-        #    self.position.x = SCREEN_WIDTH
-        #if self.position.x > SCREEN_WIDTH:
-        #    self.position.x = 0
-        #if self.position.y < 0:
-        #    self.position.y = SCREEN_HEIGHT
-        #if self.position.y > SCREEN_HEIGHT:
-        #    self.position.y = 0
+        if self.position.x < 0:
+            self.position.x = SCREEN_WIDTH
+        if self.position.x > SCREEN_WIDTH:
+            self.position.x = 0
+        if self.position.y < 0:
+            self.position.y = SCREEN_HEIGHT
+        if self.position.y > SCREEN_HEIGHT:
+            self.position.y = 0
 
     def update(self, dt):
         keys = pygame.key.get_pressed()

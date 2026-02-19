@@ -5,6 +5,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from counter import Counter
 
 def main():
     pygame.init()
@@ -22,10 +23,11 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
-
+    #Counter.containers = (drawable)
  
     player1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     af1 = AsteroidField()
+    counter = Counter(0)
 
     while True:
         log_state()
@@ -37,11 +39,12 @@ def main():
         screen.fill("black")
         for drawling in drawable:
             drawling.draw(screen)
+        counter.draw(screen)
         updatable.update(dt)
         for asti in asteroids:
             if asti.collides_with(player1):
                 log_event("player_hit")
-                print("Game over!")
+                print(f"Game over with {counter.value} points!")
                 sys.exit()
             for shot in shots:
                 if asti.collides_with(shot):
@@ -49,6 +52,7 @@ def main():
                     #asti.kill()
                     asti.split()
                     shot.kill()
+                    counter.value += 1
 
 
         """
