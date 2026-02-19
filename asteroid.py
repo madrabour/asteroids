@@ -1,12 +1,20 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED, PLAYER_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import LINE_WIDTH, SCREEN_WIDTH, SCREEN_HEIGHT
 
-class Player(CircleShape):
-    def __init__(self, x, y):
-        super().__init__(x, y, PLAYER_RADIUS)
-        self.rotation = 0
+class Asteroid(CircleShape):
+    def __init__(self, x, y, radius):
+        super().__init__(x, y, radius)
+
+    def draw(self, screen):
+        pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)
+
+    def update(self, dt):
+        self.position += self.velocity * dt
         
+
+        
+"""
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
@@ -41,10 +49,10 @@ class Player(CircleShape):
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_d]:
+        if keys[pygame.K_a]:
             self.rotate(dt)
             
-        if keys[pygame.K_a]:
+        if keys[pygame.K_d]:
             self.rotate(-1*dt)
             
         if keys[pygame.K_w]:
@@ -52,4 +60,4 @@ class Player(CircleShape):
 
         if keys[pygame.K_s]:
             self.move(-1*dt)
-
+"""

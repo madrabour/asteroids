@@ -1,7 +1,9 @@
 import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS, LINE_WIDTH
 from logger import log_state
-import player
+from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     pygame.init()
@@ -9,9 +11,18 @@ def main():
 
     fps_clock = pygame.time.Clock()
     dt = 0
-    
-    player1 = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    
+
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
+
+ 
+    player1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    af1 = AsteroidField()
 
     while True:
         log_state()
@@ -21,8 +32,9 @@ def main():
                 return
 
         screen.fill("black")
-        player1.draw(screen)
-        player1.update(dt)
+        for drawling in drawable:
+            drawling.draw(screen)
+        updatable.update(dt)
         
         pygame.display.flip()
         
