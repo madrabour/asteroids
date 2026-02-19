@@ -1,7 +1,7 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS, LINE_WIDTH
 from logger import log_state
-
+import player
 
 def main():
     pygame.init()
@@ -9,6 +9,8 @@ def main():
 
     fps_clock = pygame.time.Clock()
     dt = 0
+    
+    player1 = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
 
     while True:
@@ -19,6 +21,8 @@ def main():
                 return
 
         screen.fill("black")
+        player1.draw(screen)
+        
         pygame.display.flip()
         
         last_call_time = fps_clock.tick(60)
